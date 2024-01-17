@@ -1,0 +1,52 @@
+﻿/* Önceki ve sonraki ay geçiş düğmeleri için stiller */
+.arrow-button {
+	background-color: #f9f9f9;
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	padding: 5px 10px;
+	margin: 5px;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+/* Takvim ve kaydırıcı için stiller */
+.calendar-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.calendar-wrapper {
+	flex-grow: 1;
+	overflow: hidden;
+	position: relative;
+}
+
+table {
+	width: 100%;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 10px;
+	text-align: center;
+}
+
+.date-button {
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	background-color: #f9f9f9;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+	.date-button:hover {
+		background-color: #e0e0e0;
+	}

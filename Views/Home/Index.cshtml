@@ -1,0 +1,198 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .meeting-button1 {
+            position: absolute;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+       
+        .meeting-button1:hover {
+            background-color: #2980b9;
+        }
+
+        /* Butonların konumları */
+    
+        #button1 {
+            width: 150px;
+            height: 150px;
+            top: 200px;
+            left: 750px;
+        }
+
+        #button2 {
+            width: 150px;
+            height: 150px;
+            top: 375px;
+            left: 750px;
+        }
+
+        #button3 {
+            width: 150px;
+            height: 150px;
+            top: 200px;
+            left: 550px;
+            text-size-adjust: auto;
+        }
+
+        #button4 {
+            width: 150px;
+            height: 150px;
+            top: 375px;
+            left: 550px;
+        }
+        .meeting-btn1 {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 100px;
+            left: 250px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .meeting-button2 {
+            position: absolute;
+            top: 600px;
+            right: 550px; 
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+          
+        }
+        .meeting-button {
+            position: absolute;
+            top: 200px;
+            right: 550px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .ot-icon {
+            opacity:0.7;
+            width: 50px;
+            height: 50px;
+            background-image: url("/images/ot.png"); /* El sıkışma simgesi resmini eklemelisiniz */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-right: 10px;
+        }
+        .pt-icon {
+            opacity: 0.7;
+            width: 50px;
+            height: 50px;
+            background-image: url("/images/pt.png"); /* El sıkışma simgesi resmini eklemelisiniz */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-right: 10px;
+        }
+        .pr-icon {
+            opacity: 0.7;
+            width: 50px;
+            height: 50px;
+            background-image: url("/images/pr.png"); /* El sıkışma simgesi resmini eklemelisiniz */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-right: 10px;
+        }
+
+        .en-icon {
+            opacity: 0.7;
+            width: 50px;
+            height: 50px;
+            background-image: url("/images/en.png"); /* El sıkışma simgesi resmini eklemelisiniz */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-right: 10px;
+        }
+
+            .handshake-icon {
+            width: 305px;
+            height: 305px;
+            background-image: url("/images/handshake-icon.png"); /* El sıkışma simgesi resmini eklemelisiniz */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-right: 10px;
+        }
+
+        .meeting-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Meeting</title>
+</head>
+<body>
+    <div class="">
+        @Html.ActionLink("MEETING", "Index", "DataPage", new { }, new { @class = "btn meeting-button handshake-icon" })
+    </div>
+
+
+
+    <button class="meeting-button1" id="button1" onclick="redirectToPrPage()">
+        <div class="pr-icon"></div>
+        PRODUCTION
+    </button>
+
+
+
+    <button class="meeting-button1" id="button2" onclick="redirectToOtherPage()">
+        <div class="ot-icon"></div>
+        OTHER
+    </button>
+
+    <button class="meeting-button1" id="button3" onclick="redirectToPtPage()">
+        <div class="pt-icon"></div>
+        PRODUCTION TECHNICAL
+    </button>
+
+    <button class="meeting-button1" id="button4" onclick="redirectToEnPage()">
+        <div class="en-icon"></div>
+        ENGINEERING
+    </button>
+</body>
+</html>
+<script>
+    function redirectToOtherPage() {
+
+        window.location.href = '@Url.Action("Index", "Other")';
+    }
+    function redirectToPrPage() {
+
+    window.location.href = '@Url.Action("Index", "Pr")';
+    }
+    function redirectToEnPage() {
+
+    window.location.href = '@Url.Action("Index", "En")';
+    }
+    function redirectToPtPage() {
+
+    window.location.href = '@Url.Action("Index", "Pt")';
+}
+</script>

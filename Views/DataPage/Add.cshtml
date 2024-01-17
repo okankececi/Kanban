@@ -1,0 +1,698 @@
+﻿@model KanbanMeeting.Models.CombinedViewModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dashboard</title>
+    <link href="~/Scripts/main.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <style>
+        #myChart {
+            width: 100%;
+            max-height: 400px;
+        }
+
+        .container-fluid {
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <br />
+    <br />
+    <div class="container-fluid" style="text-align:center;">
+        <!-- 1. Satır -->
+
+
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <select id="unitSearchDropdown">
+                    @{
+                        // Unit id'yi bir değişkene atayalım
+                        var unitId = 1; // Bu değeri dilediğiniz gibi değiştirebilirsiniz
+
+                        // Unit id'ye göre bir foreach döngüsü ekleyelim
+                        foreach (var item in Model.ProductivityList.Where(x => x.unit_id == unitId))
+                        {
+                            <option value="@item.unit_id">Unit-@item.unit_id</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                @{
+                    // Unit 1 için tüm building productivity'yi topla
+                    decimal? totalBuildingProductivityUnit1 = Model.ProductivityList
+                        .Where(x => x.unit_id == 1)
+                        .Select(x => x.building_productivity)
+                        .Sum();
+
+                    // Toplamı 4'e bölerek ortalama building productivity'yi hesapla
+                    decimal? averageBuildingProductivityUnit1 = totalBuildingProductivityUnit1 / 4;
+                }
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Building Verimlilik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="background-color: yellow;">@averageBuildingProductivityUnit1 &#37;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                @{
+                    // Unit 1 için tüm building productivity'yi topla
+                    decimal? totalCuringProductivityUnit1 = Model.ProductivityList
+                        .Where(x => x.unit_id == 1)
+                        .Select(x => x.curing_productivity)
+                        .Sum();
+
+                    // Toplamı 4'e bölerek ortalama building productivity'yi hesapla
+                    decimal? averageCuringProductivityUnit1 = totalCuringProductivityUnit1 / 4;
+                }
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Curing Verimlilik</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="background-color: yellow;">@averageCuringProductivityUnit1 &#37;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <!-- 2. Satır -->
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <!--mc1-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>MC</th>
+                                <th>Ave. CT</th>
+                                <th>Effiency</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.ProductivityList.Where(x => x.mc_id == 1))
+                            {
+                                <tr>
+                                    <td>@item.mc_id</td>
+                                    <td>@item.cycle_time</td>
+                                    <td>@item.building_productivity</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+                <!--mc2-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>MC</th>
+                                <th>Ave. CT</th>
+                                <th>Effiency</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var item in Model.ProductivityList.Where(x => x.mc_id == 2))
+                            {
+                                <tr>
+                                    <td>@item.mc_id</td>
+                                    <td>@item.cycle_time</td>
+                                    <td>@item.building_productivity</td>
+
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <!--mc2-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>MC</th>
+                                <th>Ave. CT</th>
+                                <th>Effiency</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var item in Model.ProductivityList.Where(x => x.mc_id == 3))
+                            {
+                                <tr>
+                                    <td>@item.mc_id</td>
+                                    <td>@item.cycle_time</td>
+                                    <td>@item.building_productivity</td>
+
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+                <!--mc2-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>MC</th>
+                                <th>Ave. CT</th>
+                                <th>Effiency</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @foreach (var item in Model.ProductivityList.Where(x => x.mc_id == 4))
+                            {
+                                <tr>
+                                    <td>@item.mc_id</td>
+                                    <td>@item.cycle_time</td>
+                                    <td>@item.building_productivity</td>
+
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Diğer MC'ler için aynı yapıyı devam ettirin -->
+        </div>
+
+
+
+        <!------------------------------------------------------------------------------------------->
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <!--mc1-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="4">ACTUAL</th>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>SIZE</th>
+                                <th>CT</th>
+                                <th>TIRE QTY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.MachineSizeInfoList.Any(x => x.mc_no == 1))
+                            {
+                                int counter = 1; // Sayaç başlangıcı
+                                foreach (var item in Model.MachineSizeInfoList.Where(x => x.mc_no == 1))
+                                {
+                                    <tr>
+                                        <td>@counter</td>
+                                        <td>@item.size_code</td>
+                                        <td>@item.mc_no</td>
+                                        <td>@item.tire_qty</td>
+                                    </tr>
+                                    counter++; // Sayaçı artır
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+                <!--mc2-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="4">ACTUAL</th>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>SIZE</th>
+                                <th>CT</th>
+                                <th>TIRE QTY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.MachineSizeInfoList.Any(x => x.mc_no == 2))
+                            {
+                                int counter1 = 1; // Sayaç başlangıcı
+                                foreach (var item in Model.MachineSizeInfoList.Where(x => x.mc_no == 2))
+                                {
+                                    <tr>
+                                        <td>@counter1</td>
+                                        <td>@item.size_code</td>
+                                        <td>@item.mc_no</td>
+                                        <td>@item.tire_qty</td>
+                                    </tr>
+                                    counter1++; // Sayaçı artır
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+                <!--mc3-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="4">ACTUAL</th>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>SIZE</th>
+                                <th>CT</th>
+                                <th>TIRE QTY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.MachineSizeInfoList.Any(x => x.mc_no == 3))
+                            {
+                                int counter2 = 1; // Sayaç başlangıcı
+                                foreach (var item in Model.MachineSizeInfoList.Where(x => x.mc_no == 3))
+                                {
+                                    <tr>
+                                        <td>@counter2</td>
+                                        <td>@item.size_code</td>
+                                        <td>@item.mc_no</td>
+                                        <td>@item.tire_qty</td>
+                                    </tr>
+                                    counter2++; // Sayaçı artır
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-3">
+                <!--mc4-->
+                <div class="mb-3">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="4">ACTUAL</th>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>SIZE</th>
+                                <th>CT</th>
+                                <th>TIRE QTY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.MachineSizeInfoList.Any(x => x.mc_no == 4))
+                            {
+                                int counter3 = 1; // Sayaç başlangıcı
+                                foreach (var item in Model.MachineSizeInfoList.Where(x => x.mc_no == 4))
+                                {
+                                    <tr>
+                                        <td>@counter3</td>
+                                        <td>@item.size_code</td>
+                                        <td>@item.mc_no</td>
+                                        <td>@item.tire_qty</td>
+                                    </tr>
+                                    counter3++; // Sayaçı artır
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div style="width:100%; height:100%">
+                <div id="chartContainer">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+            </div>
+        </div>
+
+
+        <br />
+        <br />
+        <br />
+
+
+        <!-- 4. Satır -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table border="1" style="text-align:center;" width="100%" height="100%">
+                        <thead>
+                            <tr>
+                                <th>Building</th>
+                                <th colspan="3" style="border: none;"></th>
+                                <th colspan="12">LOSS AÇIKLAMASI</th>
+                                <th rowspan="2" colspan="3">Takip</th>
+                            </tr>
+                            <tr>
+                                <th>Top Losses</th>
+                                <th>MC</th>
+
+                                <th>Loss(%)</th>
+                                <th>Loss Type</th>
+                                <th colspan="3">PR</th>
+                                <th colspan="3">PT</th>
+                                <th colspan="3">EN</th>
+                                <th colspan="3">OTHER</th>
+
+                            </tr>
+                            <tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int counter4 = 1; // Sayaç başlangıcı
+                            }
+
+                            @foreach (var item in Model.CombinedLossDataList.Where(x => x.LossSummary.unit_id == 1 && (x.LossSummary.process_id == 1)))
+
+                            {
+                                <tr>
+                                    <td style="background-color:none;" name="id" id="id">@counter4</td>
+                                    <td style="background-color:yellow;">@item.LossSummary.mc_id</td>
+                                    <td style="background-color:yellow;">@item.LossSummary.loss_percent&#37;</td>
+                                    <td style="background-color:yellow;">@item.LossSummary.loss_name</td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="pr">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 1)
+                                        {
+                                            @item.LossComment.comment
+                                        }
+                                    </td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="pt">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 2)
+                                        {
+                                            @item.LossComment.comment
+                                        }
+                                    </td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="pc">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 3)
+                                        {
+                                            @item.LossComment.comment
+                                        }
+                                    </td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="other">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 4)
+                                        {
+                                            @item.LossComment.comment
+                                        }
+                                    </td>
+                                    <td colspan="3" class="ozel-th "><input type="text" class="editable-input" name="takip" id="takip" disabled></td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 1)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 2)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 3)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 4)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                counter4++;
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 5. Satır -->
+        <br />
+        <br />
+        <br />
+        <!-- 4. Satır -->
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table border="1" style="text-align:center;" width="100%" height="100%">
+                        <thead>
+                            <tr>
+                                <th>Building</th>
+                                <th colspan="2" style="border: none;"></th>
+                                <th colspan="12">LOSS AÇIKLAMASI</th>
+                                <th rowspan="2" colspan="3">Takip</th>
+                            </tr>
+                            <tr>
+                                <th>Top Losses</th>
+                              
+
+                                <th>Loss(%)</th>
+                                <th>Loss Type</th>
+                                <th colspan="3">PR</th>
+                                <th colspan="3">PT</th>
+                                <th colspan="3">EN</th>
+                                <th colspan="3">OTHER</th>
+
+                            </tr>
+                            <tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int counter5 = 1; // Sayaç başlangıcı
+                            }
+
+                            @foreach (var item in Model.CombinedLossDataList.Where(x => x.LossSummary.unit_id == 1 && (x.LossSummary.process_id == 2)))
+
+                            {
+                                <tr>
+                                    <td style="background-color:none;" name="id" id="id">@counter5</td>
+                                    
+                                    <td style="background-color:yellow;">@item.LossSummary.loss_percent&#37;</td>
+                                    <td style="background-color:yellow;">@item.LossSummary.loss_name</td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="pr">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 1)
+                                        {
+                                            @item.LossComment.comment
+                                        } 
+                                    </td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="pt">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 2)
+                                        {
+                                            @item.LossComment.comment
+                                        }
+                                    </td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="en">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 3)
+                                        {
+                                            @item.LossComment.comment
+                                        }
+                                    </td>
+                                    <td colspan="3" class="ozel-th expand-button" style="background-color:#ef9a9a;" id="other">
+                                        @if (item.LossComment != null && item.LossComment.department_id == 4)
+                                        {
+                                            @item.LossComment.comment
+                                        }
+                                    </td>
+                                    <td colspan="3" class="ozel-th "><input type="text" class="editable-input" name="takip" id="takip" disabled></td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21" id="pr">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 1)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21"  id="pt">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 2)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21"  id="en">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 3)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td colspan="21" id="other">
+                                        <p>
+                                            @if (item.LossComment != null && item.LossComment.department_id == 4)
+                                            {
+                                                @item.LossComment.comment
+                                            }
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                counter5++;
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       </div>
+        <br />
+
+        <div class="row d-flex justify-content-end" style="padding-right:100px;">
+            <button type="submit" class="btn btn-success mr-3">
+                Kayıt
+            </button>
+
+        </div>
+
+
+
+
+
+
+        <script>
+            var chartContainer = document.getElementById('chartContainer');
+            var chartCanvas = document.getElementById('myChart');
+
+            // Container'ın genişlik ve yükseklik değerlerini al
+            var containerWidth = chartContainer.offsetWidth;
+            var containerHeight = chartContainer.offsetHeight;
+
+            // Canvas'ın boyutlarını ayarla
+            chartCanvas.style.width = containerWidth + 'px';
+            chartCanvas.style.height = containerHeight + 'px'; 
+
+        // Chart.js grafik oluşturma
+        var ctx = chartCanvas.getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Sütun grafik olarak başlıyoruz
+            data: {
+                labels: ['1', '2', '3', '5', '6', '7', '8'],
+                datasets: [
+                    {
+                        label: '',
+                        type: 'line', // İkinci eksen için çizgi grafiği
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderWidth: 2,
+                        fill: false,
+                        data: [37, 28, 28, 28, 27, 12, 10]
+                    },
+                    {
+                        label: '',
+                        type: 'bar', // İlk eksen için sütun grafiği
+                        backgroundColor: 'rgb(75, 192, 192)',
+                        data: [4.9, 8.6, 12.3, 15.9, 19.5, 24.3, 25.6]
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    },
+                    y1: {
+                        beginAtZero: true,
+                        position: 'right', // İkinci eksen sağda olacak
+                        suggestedMax: 50 // İkinci eksenin maksimum değeri
+                    }
+                }
+            }
+        });
+
+        </script>
+        <script src="~/Scripts/chart.js"></script>
+        <script src="~/Scripts/expand.js"></script>
+
+        <script>document.getElementById("unitDropdown").addEventListener("change", function () { var selectedUnit = this.value; onsole.log("Seçilen Unit: " + selectedUnit); });</script>
+        <script src="~/Scripts/chart.min.js"></script>
+</body>
+</html>

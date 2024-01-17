@@ -1,0 +1,164 @@
+﻿body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #007bff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.nav-item.active .nav-link {
+    background-color: #28a745;
+}
+
+.navbar-toggler-icon {
+    background-color: white;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 56px); /* Ekran yüksekliği eksi navbar yüksekliği */
+}
+
+.column {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    height: 325px;
+    width: 100%;
+}
+
+.container-fluid {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top:50px;
+}
+
+hq {
+    width: 100%;
+    height: 100%;
+}
+
+/* Özelleştirilmiş stil ekleyebilirsiniz */
+
+/* Açılır liste genişliğini ayarla */
+#unitDropdown {
+    width: 100%;
+}
+
+/* Tablo hücresi için padding ve margin sıfırla */
+table, th, td {
+    white-space: normal;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th1, td1 {
+    white-space: normal;
+    padding: 6px;
+    text-align: left;
+}
+
+.header {
+    background-color: #FFFF00; /* Yellow background for header */
+}
+
+.light-yellow {
+    background-color: #FFFF99; /* Light yellow background for loss values */
+}
+
+.white {
+    background-color: #FFFFFF; /* White background for other cells */
+}
+
+.ozel-th {
+    width: 250px; /* Genişlik değeri istediğiniz gibi ayarlanabilir */
+    height: 25px;
+}
+
+.ozel-td {
+    width: 150px; /* Genişlik değeri istediğiniz gibi ayarlanabilir */
+    padding: 10px;
+}
+
+tr:hover {
+    background-color: #f5f5f5; /* Sıra üzerine gelindiğinde arka plan rengini değiştir */
+}
+
+.expandable-row {
+    display: none; /* İlk başta gizli */
+}
+
+.expand-button {
+    cursor: pointer;
+    font-style: italic;
+    color: black;
+}
+
+    .expand-button:hover {
+        color: blue; /* Butonun rengini değiştirecek olan stil */
+    }
+
+.expandable-row-show {
+    display: table-row; /* Detaylar açıkken görünür */
+}
+
+.expandable-row-container {
+    position: relative; /* Pozisyonu göreceli yapın */
+    margin-top: 10px; /* İstediğiniz boşluğu ayarlayın */
+    z-index: 1; /* Gerekirse z-index değerini ayarlayın */
+}
+
+/* custom.css içeriği */
+@media (max-width: 768px) {
+    .table-responsive table {
+        font-size: 12px; /* Küçük ekranlarda tablo font boyutunu küçült */
+    }
+}
+
+#chartContainer {
+    width: 100%; /* Container genişliğini %100 olarak ayarlayın */
+    height: 400px; /* Yüksekliği 400px olarak ayarlayın */
+}
+
+    #chartContainer canvas {
+        width: 100% !important; /* Canvas genişliğini %100 ve !important ile zorunlu kılın */
+        height: 100% !important; /* Canvas yüksekliğini %100 ve !important ile zorunlu kılın */
+    }

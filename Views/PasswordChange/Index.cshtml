@@ -1,0 +1,96 @@
+﻿@model KanbanMeeting.Models.mst_user
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/sweetAlert.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!DOCTYPE html>
+<title>Şifre Degiştirme</title>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Password Change</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/sign-in.css" rel="stylesheet" />
+    <style>
+        .form-signin {
+            max-width: 400px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+        }
+
+        .form-floating {
+            margin-bottom: 15px;
+        }
+
+        .btn-save {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: 1px solid #218838;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .btn-save:hover {
+                background-color: #218838;
+            }
+    </style>
+</head>
+
+<body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <div class="form-signin">
+            @using (Html.BeginForm("Index", "PasswordChange", FormMethod.Post, new { @id = "myForm" }))
+            {
+                @Html.HiddenFor(m => m.id)
+                <h1 class="h3 mb-2 fw-normal text-center">Password Change</h1>
+
+                if (TempData["mesaj"] != null)
+                {
+                    <div class="alert @TempData["sitil"]">
+                        @TempData["mesaj"]
+                    </div>
+                }
+                else
+                {
+                    <div class="alert @ViewBag.sitil">
+                        @ViewBag.mesaj
+                    </div>
+                }
+
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="password">Old Password</label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    <label for="newPassword">New Password</label>
+                </div>
+
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="newPasswordCheck" name="newPasswordCheck" required>
+                    <label for="newPasswordCheck">Confirm New Password</label>
+                </div>
+
+                <button class="btn btn-primary w-100 py-2" type="submit">Change Password</button>
+            }
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
